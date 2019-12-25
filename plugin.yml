@@ -1,0 +1,17 @@
+name: Pinautomaat
+main: mohagames\pinautomaat\Pinautomaat
+version: 1.0.0
+api: 3.6.2
+author: Mohagames205
+
+description: Pinnen met gemak!
+website: https://github.com/Mohagames205/Pinautomaat
+
+commands:
+  pinautomaat:
+    description: ATM main command
+    permission: pinautomaat.admin
+
+  permissions:
+    pinautomaat.admin:
+      default: OP
