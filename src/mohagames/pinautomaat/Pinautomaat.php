@@ -2,13 +2,10 @@
 
 namespace mohagames\pinautomaat;
 
-use mohagames\LevelAPI\utils\LevelManager;
 use mohagames\PlotArea\utils\Location;
-use pocketmine\entity\projectile\Snowball;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\level\Explosion;
 use pocketmine\level\Position;
-use pocketmine\level\sound\Sound;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 use pocketmine\Server;
