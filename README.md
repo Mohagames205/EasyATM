@@ -1,5 +1,7 @@
   # EasyATM
   
+  This plugin depends on the FormAPI plugin!
+  
   ## Usage
   
   | Command | Description | Permission |
