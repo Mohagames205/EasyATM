@@ -48,10 +48,10 @@ class Pinautomaat extends PluginBase implements Listener
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
         switch($command->getName()){
-            case "pinautomaat":
+            case "atm":
                 if(isset($args[0])){
                     switch($args[0]){
-                        case "make":
+                        case "create":
                             $this->make_atm[$sender->getName()] = true;
                             $sender->sendMessage("§aGelieve nu op de block te klikken waarvan je een ATM wilt maken.");
                             break;
@@ -108,13 +108,15 @@ class Pinautomaat extends PluginBase implements Listener
     public function makeATMInteract(PlayerInteractEvent $e){
         $player = $e->getPlayer();
         if(isset($this->make_atm[$player->getName()])){
-            if(!$this->getATM($e->getBlock())) {
-                $e->setCancelled();
-                $this->createATM($e->getBlock());
-                $player->sendMessage("§aDe ATM is succesvol aangemaakt.");
-            }
-            else{
-                $player->sendMessage("§4Hier staat al een ATM");
+            if($event->getBlock()->getId() == $this->getConfig()->get("pin_block_id")){
+                if(!$this->getATM($e->getBlock())) {
+                    $e->setCancelled();
+                    $this->createATM($e->getBlock());
+                    $player->sendMessage("§aDe ATM is succesvol aangemaakt.");
+                }
+                else{
+                    $player->sendMessage("§4Hier staat al een ATM");
+                }
             }
             unset($this->make_atm[$player->getName()]);
         }
