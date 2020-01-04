@@ -1,36 +1,26 @@
 <?php
 
-namespace mohagames\pinautomaat;
+namespace mohagames\EasyATM;
 
-use mohagames\PlotArea\utils\Location;
-use pocketmine\event\block\BlockBreakEvent;
-use pocketmine\level\Explosion;
-use pocketmine\level\Position;
-use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat;
-use pocketmine\Server;
-use pocketmine\Player;
-use pocketmine\plugin\PluginBase;
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\item\ItemIds;
-use jojoe77777\FormAPI\ModalForm;
 use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\SimpleForm;
 use onebone\economyapi\EconomyAPI;
-use pocketmine\item\Bow;
-use pocketmine\block\Block;
-use pocketmine\level\Level;
-use pocketmine\item\Item;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\ItemFactory;
-use pocketmine\event\player\PlayerDeathEvent;
-use pocketmine\item\Totem;
-use pocketmine\math\Vector3;
+use pocketmine\item\ItemIds;
+use pocketmine\level\Explosion;
+use pocketmine\level\Position;
+use pocketmine\Player;
+use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
+use pocketmine\utils\TextFormat;
 
 
-class Pinautomaat extends PluginBase implements Listener
+class EasyATM extends PluginBase implements Listener
 {
 
     public $make_atm;
@@ -105,16 +95,16 @@ class Pinautomaat extends PluginBase implements Listener
 
     }
 
-    public function makeATMInteract(PlayerInteractEvent $e){
+    public function makeATMInteract(PlayerInteractEvent $e)
+    {
         $player = $e->getPlayer();
-        if(isset($this->make_atm[$player->getName()])){
-            if($event->getBlock()->getId() == $this->getConfig()->get("pin_block_id")){
-                if(!$this->getATM($e->getBlock())) {
+        if (isset($this->make_atm[$player->getName()])) {
+            if ($e->getBlock()->getId() == $this->getConfig()->get("pin_block_id")) {
+                if (!$this->getATM($e->getBlock())) {
                     $e->setCancelled();
                     $this->createATM($e->getBlock());
                     $player->sendMessage("§aDe ATM is succesvol aangemaakt.");
-                }
-                else{
+                } else {
                     $player->sendMessage("§4Hier staat al een ATM");
                 }
             }
@@ -292,7 +282,7 @@ class Pinautomaat extends PluginBase implements Listener
                         $player = $event->getPlayer();
                         $this->menu($player);
                     } else {
-                        $player->sendPopup("§4U kan de pinautomaat niet gebruiken in §2Creative");
+                        $player->sendPopup("§4U kan de EasyATM niet gebruiken in §2Creative");
                     }
                 }
         }
@@ -303,7 +293,7 @@ class Pinautomaat extends PluginBase implements Listener
             $this->deleteATM($e->getBlock());
             $ex = new Explosion($e->getBlock(), 1);
             $ex->explodeB();
-            $e->getPlayer()->sendMessage("§4POEF, pinautomaat is gone :o");
+            $e->getPlayer()->sendMessage("§4POEF, EasyATM is gone :o");
         }
     }
 }
